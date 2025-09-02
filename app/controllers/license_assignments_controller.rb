@@ -5,7 +5,7 @@ class LicenseAssignmentsController < ApplicationController
 
   def create
     assigner = LicenseAssignments::BulkAssigner.new(
-      account: account,
+      account:,
       user_ids: params[:user_ids],
       product_ids: params[:product_ids]
     )
@@ -27,7 +27,7 @@ class LicenseAssignmentsController < ApplicationController
 
   def bulk_destroy
     unassigner = LicenseAssignments::BulkUnassigner.new(
-      account: account,
+      account:,
       user_ids: params[:user_ids],
       product_ids: params[:product_ids]
     )

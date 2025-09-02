@@ -1,8 +1,9 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
   <h1><%= @account.name %></h1>
-  <div>
-    <%= link_to "Edit Account", edit_account_path(@account), class: "btn btn-secondary" %>
-    <%= link_to "Back to Accounts", accounts_path, class: "btn btn-outline-secondary" %>
+  <div class="d-flex justify-content-between align-items-center">
+    <%= link_to "Manage License Assignments", account_license_assignments_path(@account), class: "btn btn-success mx-2" %>
+    <%= link_to "Edit Account", edit_account_path(@account), class: "btn btn-secondary mx-2" %>
+    <%= link_to "Back to Accounts", accounts_path, class: "btn btn-outline-secondary mx-2" %>
   </div>
 </div>
 
@@ -26,7 +27,6 @@
         <% end %>
       </div>
     </div>
-    <%= link_to "Manage License Assignments", account_license_assignments_path(@account), class: "btn btn-success btn-sm mt-4" %>
   </div>
   
   <div class="col-md-6">

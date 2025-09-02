@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1><%= @user.name %></h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to "Accounts", accounts_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to @account.name, @account %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to "Users", account_users_path(@account) %>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page"><%= @user.name %></li>
+      </ol>
+    </nav>
+  </div>
+  <div>
+    <%= link_to "Edit User", edit_account_user_path(@account, @user), class: "btn btn-secondary" %>
+    <%= link_to "Back to Users", account_users_path(@account), class: "btn btn-outline-secondary" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5>User Details</h5>
+      </div>
+      <div class="card-body overflow-auto" style="height: 35rem;">
+        <p><strong>Name:</strong> <%= @user.name %></p>
+        <p><strong>Email:</strong> <%= @user.email %></p>
+        <p><strong>Account:</strong> <%= @account.name %></p>
+        <p><strong>Total Licenses:</strong> <%= @user.license_count %></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5>Assigned Licenses</h5>
+      </div>
+      <div class="card-body overflow-auto" style="height: 35rem;">
+        <% if @license_assignments.any? %>
+          <% @license_assignments.each do |assignment| %>
+            <div class="border-bottom pb-2 mb-2">
+              <strong><%= assignment.product.name %></strong><br>
+              <small class="text-muted">Assigned: <%= assignment.created_at.strftime("%B %d, %Y") %></small>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted">No licenses assigned yet.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

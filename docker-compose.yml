@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pantry_chef_development
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d pantry_chef_development"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build:
+      context: .
+      target: dev
+    environment:
+      RAILS_ENV: development
+      PGHOST: db
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: pantry_chef_development
+    volumes:
+      - .:/rails:cached
+      - bundle:/usr/local/bundle
+      - node_modules:/rails/node_modules
+      - tmp:/rails/tmp
+      - storage:/rails/storage
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: ["bin/docker-entrypoint"]
+    command: ./bin/rails server -b 0.0.0.0 -p 8080
+
+volumes:
+  db-data:
+  bundle:
+  node_modules:
+  tmp:
+  storage:

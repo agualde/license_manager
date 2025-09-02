@@ -1,0 +1,71 @@
+<!-- app/views/subscriptions/index.html.erb -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1>Subscriptions for <%= @account.name %></h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to "Accounts", accounts_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to @account.name, @account %>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Subscriptions</li>
+      </ol>
+    </nav>
+  </div>
+  <%= link_to "Add New Subscription", new_account_subscription_path(@account), class: "btn btn-primary" %>
+</div>
+
+<% if @subscriptions.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Total Licenses</th>
+          <th>Used/Available</th>
+          <th>Status</th>
+          <th>Expires</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @subscriptions.each do |subscription| %>
+          <tr>
+            <td>
+              <strong><%= subscription.product.name %></strong><br>
+              <small class="text-muted"><%= truncate(subscription.product.description, length: 50) %></small>
+            </td>
+            <td><%= subscription.number_of_licenses %></td>
+            <td>
+              <span class="badge bg-primary"><%= subscription.used_licenses_count %></span>
+              /
+              <span class="badge bg-success"><%= subscription.available_licenses %></span>
+            </td>
+            <td>
+              <% if subscription.active? %>
+                <span class="badge bg-success">Active</span>
+              <% else %>
+                <span class="badge bg-danger">Expired</span>
+              <% end %>
+            </td>
+            <td><%= subscription.expires_at.strftime("%B %d, %Y") %></td>
+            <td>
+              <%= link_to "View", [@account, subscription], class: "btn btn-outline-primary btn-sm" %>
+              <%= link_to "Edit", edit_account_subscription_path(@account, subscription), class: "btn btn-outline-secondary btn-sm" %>
+              <%= link_to "Delete", [@account, subscription], method: :delete,
+                          data: { confirm: "Are you sure?" },
+                          class: "btn btn-outline-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class="text-center py-5">
+    <p class="text-muted">No subscriptions for this account yet.</p>
+    <%= link_to "Add First Subscription", new_account_subscription_path(@account), class: "btn btn-primary" %>
+  </div>
+<% end %>

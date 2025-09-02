@@ -1,0 +1,8 @@
+<%= simple_form_for(account) do |form| %>
+  <%= form.input :name, required: true %>
+  
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to 'Cancel', accounts_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

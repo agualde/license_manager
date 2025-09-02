@@ -1,0 +1,9 @@
+<%= simple_form_for([@account, user]) do |form| %>
+  <%= form.input :name, required: true %>
+  <%= form.input :email, required: true %>
+  
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to 'Cancel', account_users_path(@account), class: "btn btn-secondary" %>
+  </div>
+<% end %>

@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1><%= @product.name %></h1>
+  <div>
+    <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-secondary" %>
+    <%= link_to "Back to Products", products_path, class: "btn btn-outline-secondary" %>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    <h5>Product Details</h5>
+  </div>
+  <div class="card-body overflow-auto" style="height: 35rem;">
+    <p><strong>Description:</strong></p>
+    <p><%= @product.description %></p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h5>Subscriptions</h5>
+  </div>
+  <div class="card-body overflow-auto" style="height: 35rem;">
+    <% if @subscriptions.any? %>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Account</th>
+              <th>Licenses</th>
+              <th>Status</th>
+              <th>Expires</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @subscriptions.each do |subscription| %>
+              <tr>
+                <td>
+                  <%= link_to subscription.account.name, subscription.account %>
+                </td>
+                <td><%= subscription.number_of_licenses %></td>
+                <td>
+                  <% if subscription.active? %>
+                    <span class="badge bg-success">Active</span>
+                  <% else %>
+                    <span class="badge bg-danger">Expired</span>
+                  <% end %>
+                </td>
+                <td><%= subscription.expires_at.strftime("%B %d, %Y") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p class="text-muted">No subscriptions for this product yet.</p>
+    <% end %>
+  </div>
+</div>

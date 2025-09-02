@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build images
+        run: docker compose build
+
+      - name: Bundle check/install inside container
+        run: |
+          set -euo pipefail
+          docker compose run --rm web bundle check || \
+          docker compose run --rm web bundle install --jobs 4 --retry 3
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      RAILS_ENV: test
+      BUNDLE_WITHOUT: ""
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+
+      - name: Reek
+        run: bundle exec reek
+
+      - name: RuboCop
+        run: bundle exec rubocop
+
+      - name: Bundler Audit
+        run: bundle exec bundler-audit check --update
+
+      - name: Brakeman
+        run: bundle exec brakeman --no-progress --exit-on-warn
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: [build, lint]
+    env:
+      RAILS_ENV: test
+      BUNDLE_WITHOUT: ""
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/license_manager_test
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGPORT: "5432"
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: license_manager_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd="pg_isready -U postgres -h localhost"
+          --health-interval=5s --health-timeout=5s --health-retries=10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+
+      - name: Init DB
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
+
+      - name: RSpec
+        run: bundle exec rake spec
+

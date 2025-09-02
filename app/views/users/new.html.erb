@@ -1,0 +1,19 @@
+<div class="mb-4">
+  <h1>New User for <%= @account.name %></h1>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to "Accounts", accounts_path %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to @account.name, @account %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to "Users", account_users_path(@account) %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">New</li>
+    </ol>
+  </nav>
+</div>
+
+<%= render 'form', user: @user %>

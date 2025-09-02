@@ -1,0 +1,22 @@
+
+<!-- app/views/subscriptions/_form.html.erb -->
+<%= simple_form_for([@account, subscription]) do |form| %>
+  <% if subscription.persisted? %>
+    <%= form.input :product_id, collection: @products, label_method: :name, value_method: :id, 
+                   prompt: "Select a product", required: true, disabled: true,
+                   hint: "Product cannot be changed after creation" %>
+  <% else %>
+    <%= form.input :product_id, collection: @available_products, label_method: :name, value_method: :id, 
+                   prompt: "Select a product", required: true,
+                   hint: "Only products without existing subscriptions are shown" %>
+  <% end %>
+  
+  <%= form.input :number_of_licenses, required: true, input_html: { min: 1 } %>
+  <%= form.input :issued_at, as: :datetime_local, required: true %>
+  <%= form.input :expires_at, as: :datetime_local, required: true %>
+  
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to 'Cancel', account_subscriptions_path(@account), class: "btn btn-secondary" %>
+  </div>
+<% end %>

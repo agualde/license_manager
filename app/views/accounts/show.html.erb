@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1><%= @account.name %></h1>
+  <div>
+    <%= link_to "Edit Account", edit_account_path(@account), class: "btn btn-secondary" %>
+    <%= link_to "Back to Accounts", accounts_path, class: "btn btn-outline-secondary" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5>Users</h5>
+        <%= link_to "Add User", new_account_user_path(@account), class: "btn btn-primary btn-sm" %>
+      </div>
+      <div class="card-body overflow-auto" style="height: 35rem;">
+        <% if @users.any? %>
+          <% @users.each do |user| %>
+            <div class="border-bottom pb-2 mb-2">
+              <strong><%= user.name %></strong><br>
+              <small class="text-muted"><%= user.email %></small>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted">No users yet.</p>
+        <% end %>
+      </div>
+    </div>
+    <%= link_to "Manage License Assignments", account_license_assignments_path(@account), class: "btn btn-success btn-sm mt-4" %>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5>Subscriptions</h5>
+        <%= link_to "Add Subscription", new_account_subscription_path(@account), class: "btn btn-primary btn-sm" %>
+      </div>
+      <div class="card-body overflow-auto" style="height: 35rem;">
+        <% if @subscriptions.any? %>
+          <% @subscriptions.each do |subscription| %>
+            <div class="border-bottom pb-2 mb-2">
+              <strong><%= subscription.product.name %></strong><br>
+              <small class="text-muted">
+                <%= subscription.number_of_licenses %> licenses | 
+                Expires: <%= subscription.expires_at.strftime("%B %d, %Y") %>
+                <% unless subscription.active? %>
+                  <span class="badge bg-danger">Expired</span>
+                <% end %>
+              </small>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted">No subscriptions yet.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

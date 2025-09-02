@@ -1,0 +1,21 @@
+
+<!-- app/views/subscriptions/edit.html.erb -->
+<div class="mb-4">
+  <h1>Editing Subscription: <%= @subscription.product.name %></h1>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to "Accounts", accounts_path %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to @account.name, @account %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to "Subscriptions", account_subscriptions_path(@account) %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Edit</li>
+    </ol>
+  </nav>
+</div>
+
+<%= render 'form', subscription: @subscription %>

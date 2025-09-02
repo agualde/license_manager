@@ -1,0 +1,74 @@
+
+<!-- app/views/subscriptions/show.html.erb -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1><%= @subscription.product.name %> Subscription</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to "Accounts", accounts_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to @account.name, @account %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to "Subscriptions", account_subscriptions_path(@account) %>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page"><%= @subscription.product.name %></li>
+      </ol>
+    </nav>
+  </div>
+  <div>
+    <%= link_to "Edit Subscription", edit_account_subscription_path(@account, @subscription), class: "btn btn-secondary" %>
+    <%= link_to "Back to Subscriptions", account_subscriptions_path(@account), class: "btn btn-outline-secondary" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5>Subscription Details</h5>
+      </div>
+      <div class="card-body overflow-auto" style="height: 35rem;">
+        <p><strong>Product:</strong> <%= @subscription.product.name %></p>
+        <p><strong>Description:</strong> <%= @subscription.product.description %></p>
+        <p><strong>Total Licenses:</strong> <%= @subscription.number_of_licenses %></p>
+        <p><strong>Used Licenses:</strong> <%= @subscription.used_licenses_count %></p>
+        <p><strong>Available Licenses:</strong> <%= @subscription.available_licenses %></p>
+        <p><strong>Issued:</strong> <%= @subscription.issued_at.strftime("%B %d, %Y") %></p>
+        <p><strong>Expires:</strong> <%= @subscription.expires_at.strftime("%B %d, %Y") %></p>
+        <p><strong>Status:</strong> 
+          <% if @subscription.active? %>
+            <span class="badge bg-success">Active</span>
+          <% else %>
+            <span class="badge bg-danger">Expired</span>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5>License Assignments</h5>
+        <% if @subscription.active? %>
+          <%= link_to "Manage Licenses", account_license_assignments_path(@account), class: "btn btn-primary btn-sm" %>
+        <% end %>
+      </div>
+      <div class="card-body overflow-auto" style="height: 35rem;">
+        <% if @license_assignments.any? %>
+          <% @license_assignments.each do |assignment| %>
+            <div class="border-bottom pb-2 mb-2">
+              <strong><%= assignment.user.name %></strong><br>
+              <small class="text-muted"><%= assignment.user.email %></small>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted">No licenses assigned yet.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

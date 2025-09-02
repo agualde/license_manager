@@ -20,7 +20,7 @@
 </div>
 
 <div data-controller="license-assignment">
-  <%= form_with url: account_license_assignments_path(@account), method: :post, local: true do |form| %>
+  <%= form_with url: account_license_assignments_path(@account), turbo_method: :post, local: true do |form| %>
     <div class="row">
       <div class="col-md-5">
         <div class="card">
@@ -95,7 +95,7 @@
   <% end %>
 
   <%= form_with url: bulk_destroy_account_license_assignments_path(@account), 
-               method: :delete, local: true, style: "display: none;",
+               turbo_method: :delete, local: true, style: "display: none;",
                data: { license_assignment_target: "unassignForm" } do |form| %>
   <% end %>
 </div>

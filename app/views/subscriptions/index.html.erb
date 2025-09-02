@@ -54,8 +54,8 @@
             <td>
               <%= link_to "View", [@account, subscription], class: "btn btn-outline-primary btn-sm" %>
               <%= link_to "Edit", edit_account_subscription_path(@account, subscription), class: "btn btn-outline-secondary btn-sm" %>
-              <%= link_to "Delete", [@account, subscription], method: :delete,
-                          data: { confirm: "Are you sure?" },
+              <%= link_to "Delete", [@account, subscription], turbo_method: :delete,
+                          data: { turbo_confirm: "Are you sure?" },
                           class: "btn btn-outline-danger btn-sm" %>
             </td>
           </tr>

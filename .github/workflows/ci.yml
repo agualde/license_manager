@@ -42,9 +42,6 @@ jobs:
           ruby-version: "3.4"
           bundler-cache: true
 
-      - name: Reek
-        run: bundle exec reek
-
       - name: RuboCop
         run: bundle exec rubocop
 

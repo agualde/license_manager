@@ -1,5 +1,3 @@
-
-<!-- app/views/subscriptions/_form.html.erb -->
 <%= simple_form_for([@account, subscription]) do |form| %>
   <% if subscription.persisted? %>
     <%= form.input :product_id, collection: @products, label_method: :name, value_method: :id, 
@@ -12,8 +10,10 @@
   <% end %>
   
   <%= form.input :number_of_licenses, required: true, input_html: { min: 1 } %>
-  <%= form.input :issued_at, as: :datetime_local, required: true %>
-  <%= form.input :expires_at, as: :datetime_local, required: true %>
+  <%= form.input :issued_at, as: :string, required: true,
+      input_html: { type: 'datetime-local', class: 'form-control' } %>
+  <%= form.input :expires_at, as: :string, required: true,
+      input_html: { type: 'datetime-local', class: 'form-control' } %>
   
   <div class="actions">
     <%= form.submit class: "btn btn-primary" %>

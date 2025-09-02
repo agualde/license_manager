@@ -38,8 +38,8 @@
             <td>
               <%= link_to "View", [@account, user], class: "btn btn-outline-primary btn-sm" %>
               <%= link_to "Edit", edit_account_user_path(@account, user), class: "btn btn-outline-secondary btn-sm" %>
-              <%= link_to "Delete", [@account, user], method: :delete,
-                          data: { confirm: "Are you sure?" },
+              <%= link_to "Delete", [@account, user], turbo_method: :delete,
+                          data: { turbo_confirm: "Are you sure?" },
                           class: "btn btn-outline-danger btn-sm" %>
             </td>
           </tr>

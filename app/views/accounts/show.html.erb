@@ -14,7 +14,7 @@
         <h5>Users</h5>
         <%= link_to "Add User", new_account_user_path(@account), class: "btn btn-primary btn-sm" %>
       </div>
-      <div class="card-body overflow-auto" style="height: 35rem;">
+      <div class="card-body overflow-auto fixed-height-large">
         <% if @users.any? %>
           <% @users.each do |user| %>
             <div class="border-bottom pb-2 mb-2">
@@ -35,7 +35,7 @@
         <h5>Subscriptions</h5>
         <%= link_to "Add Subscription", new_account_subscription_path(@account), class: "btn btn-primary btn-sm" %>
       </div>
-      <div class="card-body overflow-auto" style="height: 35rem;">
+      <div class="card-body overflow-auto fixed-height-large">
         <% if @subscriptions.any? %>
           <% @subscriptions.each do |subscription| %>
             <div class="border-bottom pb-2 mb-2">

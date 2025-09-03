@@ -28,7 +28,7 @@
       <div class="card-header">
         <h5>User Details</h5>
       </div>
-      <div class="card-body overflow-auto" style="height: 35rem;">
+      <div class="card-body overflow-auto fixed-height-large">
         <p><strong>Name:</strong> <%= @user.name %></p>
         <p><strong>Email:</strong> <%= @user.email %></p>
         <p><strong>Account:</strong> <%= @account.name %></p>
@@ -42,7 +42,7 @@
       <div class="card-header">
         <h5>Assigned Licenses</h5>
       </div>
-      <div class="card-body overflow-auto" style="height: 35rem;">
+      <div class="card-body overflow-auto fixed-height-large">
         <% if @license_assignments.any? %>
           <% @license_assignments.each do |assignment| %>
             <div class="border-bottom pb-2 mb-2">

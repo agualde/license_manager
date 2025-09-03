@@ -1,0 +1,8 @@
+.fixed-height-large {
+  height: 35rem;
+}
+
+.fixed-height-large-overflow {
+  max-height: 400px; 
+  overflow-y: auto;
+}

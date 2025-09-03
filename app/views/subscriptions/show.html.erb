@@ -30,7 +30,7 @@
       <div class="card-header">
         <h5>Subscription Details</h5>
       </div>
-      <div class="card-body overflow-auto" style="height: 35rem;">
+      <div class="card-body overflow-auto fixed-height-large">
         <p><strong>Product:</strong> <%= @subscription.product.name %></p>
         <p><strong>Description:</strong> <%= @subscription.product.description %></p>
         <p><strong>Total Licenses:</strong> <%= @subscription.number_of_licenses %></p>
@@ -57,7 +57,7 @@
           <%= link_to "Manage Licenses", account_license_assignments_path(@account), class: "btn btn-primary btn-sm" %>
         <% end %>
       </div>
-      <div class="card-body overflow-auto" style="height: 35rem;">
+      <div class="card-body overflow-auto fixed-height-large">
         <% if @license_assignments.any? %>
           <% @license_assignments.each do |assignment| %>
             <div class="border-bottom pb-2 mb-2">

@@ -10,7 +10,7 @@
   <div class="card-header">
     <h5>Product Details</h5>
   </div>
-  <div class="card-body overflow-auto" style="height: 35rem;">
+  <div class="card-body overflow-auto fixed-height-large">
     <p><strong>Description:</strong></p>
     <p><%= @product.description %></p>
   </div>
@@ -20,7 +20,7 @@
   <div class="card-header">
     <h5>Subscriptions</h5>
   </div>
-  <div class="card-body overflow-auto" style="height: 35rem;">
+  <div class="card-body overflow-auto fixed-height-large">
     <% if @subscriptions.any? %>
       <div class="table-responsive">
         <table class="table">

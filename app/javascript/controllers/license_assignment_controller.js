@@ -15,8 +15,6 @@ export default class extends Controller {
       return
     }
 
-    // ❌ was: remove all hidden inputs (kills _method & CSRF)
-    // ✅ only remove previously-added dynamic params
     this.unassignFormTarget
       .querySelectorAll('input[name="product_ids[]"], input[name="user_ids[]"]')
       .forEach(input => input.remove())
@@ -37,6 +35,6 @@ export default class extends Controller {
       this.unassignFormTarget.appendChild(input)
     })
 
-    this.unassignFormTarget.submit() // now keeps _method=delete + CSRF
+    this.unassignFormTarget.submit()
   }
 }

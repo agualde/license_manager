@@ -6,9 +6,10 @@
   <td><%= assignment.product.name %></td>
   <td><%= assignment.created_at.strftime("%B %d, %Y") %></td>
   <td>  
-    <%= link_to "Remove",
+    <%= button_to "Remove",
                 account_license_assignment_path(@account, assignment),
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                method: :delete,
+                data: { confirm: "Are you sure?" },
                 class: "btn btn-sm btn-outline-danger" %>
   </td>
 </tr>

@@ -1,0 +1,10 @@
+<div class="col-md-2 text-center d-flex flex-column justify-content-center">
+  <% if @products_with_licenses.any? && @users.any? %>
+    <%= form.submit "Assign", class: "btn btn-success mb-2" %>
+    <button type="button" class="btn btn-warning" data-action="click->license-assignment#unassign">
+      Unassign
+    </button>
+  <% else %>
+    <p class="text-muted small">Need both users and active subscriptions to manage licenses.</p>
+  <% end %>
+</div>

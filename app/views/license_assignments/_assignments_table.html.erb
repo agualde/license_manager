@@ -1,0 +1,15 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Product</th>
+        <th>Assigned Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'assignment_row', collection: @assigned_licenses, as: :assignment %>
+    </tbody>
+  </table>
+</div>

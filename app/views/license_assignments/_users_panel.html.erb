@@ -1,0 +1,14 @@
+<div class="col-md-5">
+  <div class="card">
+    <div class="card-header">
+      <h5>Users</h5>
+    </div>
+    <div class="card-body overflow-auto" style="max-height: 400px; overflow-y: auto;">
+      <% if @users.any? %>
+        <%= render partial: 'user_checkbox', collection: @users, as: :user %>
+      <% else %>
+        <%= render 'no_users_state' %>
+      <% end %>
+    </div>
+  </div>
+</div>

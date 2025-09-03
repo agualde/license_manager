@@ -1,0 +1,9 @@
+<%= form_with url: account_license_assignments_path(@account), turbo_method: :post, local: true do |form| %>
+  <div class="row">
+    <%= render 'products_panel' %>
+    <%= render 'assignment_buttons', form: form %>
+    <%= render 'users_panel' %>
+  </div>
+<% end %>
+
+<%= render 'unassign_form' %>

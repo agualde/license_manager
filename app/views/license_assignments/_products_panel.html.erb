@@ -1,0 +1,14 @@
+<div class="col-md-5">
+  <div class="card">
+    <div class="card-header">
+      <h5>Product Licenses</h5>
+    </div>
+    <div class="card-body overflow-auto" style="max-height: 400px; overflow-y: auto;">
+      <% if @products_with_licenses.any? %>
+        <%= render partial: 'product_checkbox', collection: @products_with_licenses, as: :product_data %>
+      <% else %>
+        <%= render 'shared/empty_state', message: "No active subscriptions for this account." %>
+      <% end %>
+    </div>
+  </div>
+</div>

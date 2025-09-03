@@ -1,0 +1,13 @@
+<div class="form-check mb-3">
+  <%= check_box_tag "user_ids[]", user.id, false, 
+                   class: "form-check-input", 
+                   id: "user_#{user.id}",
+                   data: { license_assignment_target: "userCheckbox" } %>
+  <%= label_tag "user_#{user.id}", class: "form-check-label" do %>
+    <strong><%= user.name %></strong><br>
+    <small class="text-muted"><%= user.email %></small>
+    <% if user.license_count > 0 %>
+      <br><span class="badge bg-info"><%= user.license_count %> licenses</span>
+    <% end %>
+  <% end %>
+</div>

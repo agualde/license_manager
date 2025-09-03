@@ -1,0 +1,13 @@
+<div class="form-check mb-3">
+  <%= check_box_tag "product_ids[]", product_data[:product].id, false, 
+                   class: "form-check-input", 
+                   id: "product_#{product_data[:product].id}",
+                   data: { license_assignment_target: "productCheckbox" } %>
+  <%= label_tag "product_#{product_data[:product].id}", class: "form-check-label" do %>
+    <strong><%= product_data[:product].name %></strong>
+    (<%= product_data[:used_licenses] %>/<%= product_data[:total_licenses] %>)
+    <% if product_data[:available_licenses] == 0 %>
+      <span class="badge bg-warning text-dark">Full</span>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,8 @@
+<div class="mt-5">
+  <h3>Current License Assignments</h3>
+  <% if @assigned_licenses.any? %>
+    <%= render 'assignments_table' %>
+  <% else %>
+    <%= render 'no_assignments_state' %>
+  <% end %>
+</div>

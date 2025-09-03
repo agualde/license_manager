@@ -20,9 +20,9 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
-gem "solid_cache"
-gem "solid_queue"
-gem "solid_cable"
+# gem "solid_cache"
+# gem "solid_queue"
+# gem "solid_cable"
 
 gem "simple_form"
 gem "chronic"
@@ -68,7 +68,7 @@ group :test do
   gem "database_cleaner-active_record"
 end
 
-group :development, :test do
+group :development, :test, :production do
   gem "factory_bot_rails"
   gem "faker"
 end
@@ -78,3 +78,5 @@ gem "annotaterb", "~> 4.19"
 gem "kaminari", "~> 1.2"
 
 gem "rspec-rails", "~> 8.0", groups: [ :development, :test ]
+
+gem "dockerfile-rails", ">= 1.7", group: :development

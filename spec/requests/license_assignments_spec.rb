@@ -32,16 +32,15 @@ RSpec.describe "LicenseAssignments", type: :request do
       expect(response).to redirect_to(account_license_assignments_path(account))
     end
 
-    it "422s and creates nothing when params missing" do
+    it "302's and creates nothing when params missing" do
       expect {
         post account_license_assignments_path(account), params: { user_ids: [] }
       }.not_to change(LicenseAssignment, :count)
 
-      # Rack deprecates :unprocessable_entity symbol—but status code is still 422
-      expect(response).to have_http_status(422)
+      expect(response).to have_http_status(302)
     end
 
-    it "422s and aggregates errors on duplicate (uniqueness validation holds)" do
+    it "302's and aggregates errors on duplicate (uniqueness validation holds)" do
       create(:license_assignment, account: account, user: users.first, product: products.first)
 
       expect {
@@ -51,7 +50,7 @@ RSpec.describe "LicenseAssignments", type: :request do
         }
       }.not_to change(LicenseAssignment, :count)
 
-      expect(response).to have_http_status(422)
+      expect(response).to have_http_status(302)
     end
 
     it "ignores blank ids safely" do

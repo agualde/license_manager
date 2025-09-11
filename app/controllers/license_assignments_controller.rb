@@ -13,9 +13,7 @@ class LicenseAssignmentsController < ApplicationController
     if assigner.call
       redirect_to account_license_assignments_path(account), notice: "Licenses assigned successfully."
     else
-      flash.now[:alert] = error_message(assigner)
-      load_index_data
-      render :index, status: :unprocessable_entity
+      redirect_to account_license_assignments_path, alert: error_message(assigner)
     end
   end
 
@@ -35,9 +33,7 @@ class LicenseAssignmentsController < ApplicationController
     if unassigner.call
       redirect_to account_license_assignments_path(account), notice: "Licenses unassigned successfully."
     else
-      flash.now[:alert] = "Unable to unassign licenses. Please try again."
-      load_index_data
-      render :index, status: :unprocessable_entity
+      redirect_to account_license_assignments_path, alert: "Unable to unassign licenses. Please try again."
     end
   end
 

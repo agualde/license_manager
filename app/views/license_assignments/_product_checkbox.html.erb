@@ -2,7 +2,11 @@
   <%= check_box_tag "product_ids[]", product_data[:product].id, false, 
                    class: "form-check-input", 
                    id: "product_#{product_data[:product].id}",
-                   data: { license_assignment_target: "productCheckbox" } %>
+                   data: { 
+                    form_validation_target: "productCheckbox",
+                    license_assignment_target: "productCheckbox",
+                    action: "change->form-validation#validate"
+                    } %>
   <%= label_tag "product_#{product_data[:product].id}", class: "form-check-label" do %>
     <strong><%= product_data[:product].name %></strong>
     (<%= product_data[:used_licenses] %>/<%= product_data[:total_licenses] %>)

@@ -2,7 +2,11 @@
   <%= check_box_tag "user_ids[]", user.id, false, 
                    class: "form-check-input", 
                    id: "user_#{user.id}",
-                   data: { license_assignment_target: "userCheckbox" } %>
+                   data: { 
+                    form_validation_target: "userCheckbox",
+                    license_assignment_target: "userCheckbox",
+                    action: "change->form-validation#validate"
+                    } %>
   <%= label_tag "user_#{user.id}", class: "form-check-label" do %>
     <strong><%= user.name %></strong><br>
     <small class="text-muted"><%= user.email %></small>

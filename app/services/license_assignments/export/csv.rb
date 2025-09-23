@@ -8,7 +8,7 @@ module LicenseAssignments
 
       def call
         generate_csv
-        
+
         @file_path
       end
 

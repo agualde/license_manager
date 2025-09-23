@@ -1,6 +1,6 @@
 <%= render 'shared/account_header', account: @account, current_page: 'License Assignments' %>
 
-<div data-controller="license-assignment">
+<div data-controller="form-validation license-assignment">
   <%= render 'license_assignment_form' %>
   <%= render 'current_assignments' %>
   <%= render 'shared/back_button', path: @account, text: "Back to Account" %>

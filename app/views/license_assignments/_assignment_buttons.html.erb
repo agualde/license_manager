@@ -1,7 +1,14 @@
 <div class="col-md-2 text-center d-flex flex-column justify-content-start mt-4">
   <% if @products_with_licenses.any? && @users.any? %>
-    <%= form.submit "Assign", class: "btn btn-success mb-2" %>
-    <button type="button" class="btn btn-warning" data-action="click->license-assignment#unassign">
+    <%= form.submit "Assign", class: "btn btn-success mb-2",
+                              disabled: true,
+                              data: { form_validation_target: "button" } %>
+    <button type="button" 
+            class="btn btn-warning" 
+            disabled
+            data-form-validation-target="button"
+            data-action="click->license-assignment#unassign"
+            >
       Unassign
     </button>
   <% else %>

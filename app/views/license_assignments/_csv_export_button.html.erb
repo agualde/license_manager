@@ -1,0 +1,5 @@
+<%= button_to "Export CSV",
+    account_csv_export_path(@account, 1, format: :csv),
+    method: :get,
+    class: 'btn btn-success mb-5',
+    form: { data: { turbo: false } } %>

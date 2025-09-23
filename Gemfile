@@ -23,6 +23,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # gem "solid_cache"
 # gem "solid_queue"
 # gem "solid_cable"
+#
+gem "csv"
 
 gem "simple_form"
 gem "chronic"

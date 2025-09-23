@@ -3,23 +3,19 @@ module Accounts
     before_action :set_account
 
     def show
-      csv_data = generate_csv_data
+      file_path = LicenseAssignments::Export::Csv.new(account_id).call
 
-      send_file csv_data,
-        filename: csv_filename,
+      send_file file_path,
+        filename: "accounts-#{Date.current}.csv",
         type: "text/csv; charset=utf-8",
-        disposition: "attachment"
+        disposition: "attachment",
+        x_sendfile: false
     end
 
     private
 
-    def generate_csv_data
-      account_id = params[:account_id].to_i
-      LicenseAssignments::Export::Csv.new(account_id).call
-    end
-
-    def csv_filename
-      "account-csv-export-#{Date.current}.csv"
+    def account_id
+      @id ||= @account.id
     end
 
     def set_account

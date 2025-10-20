@@ -73,7 +73,7 @@ group :development, :test, :production do
   gem "faker"
 end
 
-gem "annotaterb", "~> 4.19"
+gem "annotaterb", "~> 4.20"
 
 gem "kaminari", "~> 1.2"
 
